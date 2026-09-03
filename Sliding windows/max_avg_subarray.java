@@ -1,23 +1,26 @@
 class Solution {
     public double findMaxAverage(int[] nums, int k) {
-        double wmx = 0;
+    
+     // double m=Double.NEGATIVE_INFINITY;
+      double v=0;
+      for(int i=0;i<k;i++) v+=nums[i];
+     double m=v;
+     // System.out.println(m);
+      int l=0,r=k;
+      for(int i=k;i<nums.length;i++){
+        v-=nums[l];
+        v+=nums[r];
+      //  System.out.println(v);
+        m=Math.max(m,v);
+       // System.out.println(m);
+        l++;
+        r++;
+       // System.out.println(l+" "+r);
 
-        for (int i = 0; i < k; i++) {
-            wmx = wmx + nums[i];
-        }
-        double mx = wmx;
-        for (int i = k; i < nums.length; i++) {
-            wmx += nums[i] - nums[i - k];
-            mx = Math.max(mx, wmx);
-        }
-        return mx / k;
-    }
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        int[] nums = {1, 12, -5, -6, 50, 3};
-        int k = 4;
-        double result = sol.findMaxAverage(nums, k);
-        System.out.println("Maximum Average: " + result);
+      }
+     
+      
+        return m/(double)k;
+        
     }
 }
